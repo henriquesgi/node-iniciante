@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 
-import { TesteValidationPipe } from 'src/common/pipes/teste.pipe';
+import { TesteNumberValidationPipe } from 'src/common/pipes/teste-number.pipe';
 import { ValidationPipe } from 'src/common/pipes/validation.pipe';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
@@ -21,17 +21,17 @@ export class UsuariosController {
   }
 
   @Get(':id')
-  findOne(@Param('id', TesteValidationPipe, ParseIntPipe) id: number) {
+  findOne(@Param('id', TesteNumberValidationPipe, ParseIntPipe) id: number) {
     return this.usuariosService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id', TesteValidationPipe, ParseIntPipe) id: number, @Body(ValidationPipe) updateUsuarioDto: UpdateUsuarioDto) {
+  update(@Param('id', TesteNumberValidationPipe, ParseIntPipe) id: number, @Body(ValidationPipe) updateUsuarioDto: UpdateUsuarioDto) {
     return this.usuariosService.update(id, updateUsuarioDto);
   }
 
   @Delete(':id')
-  remove(@Param('id', TesteValidationPipe, ParseIntPipe) id: number) {
+  remove(@Param('id', TesteNumberValidationPipe, ParseIntPipe) id: number) {
     return this.usuariosService.remove(id);
   }
 }
