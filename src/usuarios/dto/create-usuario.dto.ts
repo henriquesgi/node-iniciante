@@ -1,4 +1,9 @@
-import { IsNumber, IsPositive, IsString, Max } from "class-validator";
+import {
+  IsNumber,
+  IsPositive,
+  IsString,
+  Max
+} from "class-validator";
 
 export class CreateUsuarioDto {
   @IsNumber()

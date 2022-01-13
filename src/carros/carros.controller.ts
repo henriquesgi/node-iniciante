@@ -1,6 +1,15 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { TesteStringValidationPipe } from 'src/common/pipes/teste-string.pipe';
-import { ValidationPipe } from 'src/common/pipes/validation.pipe';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  ValidationPipe
+} from '@nestjs/common';
+
+import { StringValidationPipe } from 'src/common/pipes/string-validation.pipe';
 import { CarrosService } from './carros.service';
 import { CreateCarroDto } from './dto/create-carro.dto';
 
@@ -8,24 +17,29 @@ import { CreateCarroDto } from './dto/create-carro.dto';
 export class CarrosController {
   constructor(private readonly carrosService: CarrosService) { }
 
-  @Post()
-  create(@Body(ValidationPipe) createCarroDto: CreateCarroDto) {
-    return this.carrosService.create(createCarroDto);
+  @Delete(':id')
+  remove(@Param('id', StringValidationPipe) id: string) {
+    return this.carrosService.remove(id);
   }
 
   @Get()
-  // findAll(): Promise<any[]> {
   findAll() {
+    // findAll(): Promise<any[]> {
     return this.carrosService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id', TesteStringValidationPipe) id: string) {
+  findOne(@Param('id', StringValidationPipe) id: string) {
     return this.carrosService.findOne(id);
   }
 
-  @Delete(':id')
-  remove(@Param('id', TesteStringValidationPipe) id: string) {
-    return this.carrosService.remove(id);
+  @Patch()
+  update(@Param('id', StringValidationPipe) id: string) {
+    return this.carrosService.update(id);
+  }
+
+  @Post()
+  create(@Body(ValidationPipe) createCarroDto: CreateCarroDto) {
+    return this.carrosService.create(createCarroDto);
   }
 }

@@ -1,7 +1,16 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+  ValidationPipe
+} from '@nestjs/common';
 
-import { TesteNumberValidationPipe } from 'src/common/pipes/teste-number.pipe';
-import { ValidationPipe } from 'src/common/pipes/validation.pipe';
+import { NumberValidationPipe } from 'src/common/pipes/number-validation.pipe';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { UsuariosService } from './usuarios.service';
@@ -10,9 +19,9 @@ import { UsuariosService } from './usuarios.service';
 export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) { }
 
-  @Post()
-  create(@Body(ValidationPipe) createUsuarioDto: CreateUsuarioDto) {
-    return this.usuariosService.create(createUsuarioDto);
+  @Delete(':id')
+  remove(@Param('id', NumberValidationPipe, ParseIntPipe) id: number) {
+    return this.usuariosService.remove(id);
   }
 
   @Get()
@@ -21,17 +30,17 @@ export class UsuariosController {
   }
 
   @Get(':id')
-  findOne(@Param('id', TesteNumberValidationPipe, ParseIntPipe) id: number) {
+  findOne(@Param('id', NumberValidationPipe, ParseIntPipe) id: number) {
     return this.usuariosService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id', TesteNumberValidationPipe, ParseIntPipe) id: number, @Body(ValidationPipe) updateUsuarioDto: UpdateUsuarioDto) {
+  update(@Param('id', NumberValidationPipe, ParseIntPipe) id: number, @Body(ValidationPipe) updateUsuarioDto: UpdateUsuarioDto) {
     return this.usuariosService.update(id, updateUsuarioDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id', TesteNumberValidationPipe, ParseIntPipe) id: number) {
-    return this.usuariosService.remove(id);
+  @Post()
+  create(@Body(ValidationPipe) createUsuarioDto: CreateUsuarioDto) {
+    return this.usuariosService.create(createUsuarioDto);
   }
 }

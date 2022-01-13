@@ -1,4 +1,6 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateHistoricoDto } from './create-historico.dto';
+import { IsDateString } from 'class-validator';
 
-export class UpdateHistoricoDto extends PartialType(CreateHistoricoDto) {}
+export class UpdateHistoricoDto {
+  @IsDateString()
+  dataDevolucao: Date;
+}

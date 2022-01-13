@@ -1,4 +1,11 @@
-import { IsNumber, IsPositive, IsString, Max, MaxLength } from "class-validator";
+import {
+  IsBoolean,
+  IsNumber,
+  IsPositive,
+  IsString,
+  Max,
+  MaxLength
+} from "class-validator";
 
 export class CreateCarroDto {
   @IsString()
@@ -19,7 +26,6 @@ export class CreateCarroDto {
   @Max(5)
   passageiros: number;
 
-
-  // TODO:
+  @IsBoolean()
   alugado: boolean;
 }

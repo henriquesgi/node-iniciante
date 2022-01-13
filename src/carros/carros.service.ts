@@ -18,4 +18,8 @@ export class CarrosService {
   remove(id: string) {
     return `This action removes a #${id} carro`;
   }
+
+  update(id: string) {
+    return `Atualização do ${id}`;
+  }
 }
