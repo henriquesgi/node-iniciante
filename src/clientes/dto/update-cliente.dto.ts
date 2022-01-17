@@ -1,6 +1,6 @@
 import { IsString } from 'class-validator';
 
-export class UpdateUsuarioDto {
+export class UpdateClienteDto {
   @IsString()
   endereco: string;
 }

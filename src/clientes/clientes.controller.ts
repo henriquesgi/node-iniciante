@@ -11,13 +11,13 @@ import {
 } from '@nestjs/common';
 
 import { NumberValidationPipe } from 'src/common/pipes/number-validation.pipe';
-import { CreateUsuarioDto } from './dto/create-usuario.dto';
-import { UpdateUsuarioDto } from './dto/update-usuario.dto';
-import { UsuariosService } from './usuarios.service';
+import { CreateClienteDto } from './dto/create-cliente.dto';
+import { UpdateClienteDto } from './dto/update-cliente.dto';
+import { ClientesService } from './clientes.service';
 
-@Controller('usuarios')
-export class UsuariosController {
-  constructor(private readonly usuariosService: UsuariosService) { }
+@Controller('clientes')
+export class ClientesController {
+  constructor(private readonly usuariosService: ClientesService) { }
 
   @Delete(':id')
   remove(@Param('id', NumberValidationPipe, ParseIntPipe) id: number) {
@@ -35,12 +35,12 @@ export class UsuariosController {
   }
 
   @Patch(':id')
-  update(@Param('id', NumberValidationPipe, ParseIntPipe) id: number, @Body(ValidationPipe) updateUsuarioDto: UpdateUsuarioDto) {
+  update(@Param('id', NumberValidationPipe, ParseIntPipe) id: number, @Body(ValidationPipe) updateUsuarioDto: UpdateClienteDto) {
     return this.usuariosService.update(id, updateUsuarioDto);
   }
 
   @Post()
-  create(@Body(ValidationPipe) createUsuarioDto: CreateUsuarioDto) {
+  create(@Body(ValidationPipe) createUsuarioDto: CreateClienteDto) {
     return this.usuariosService.create(createUsuarioDto);
   }
 }

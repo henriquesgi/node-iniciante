@@ -5,7 +5,7 @@ import {
   Max
 } from "class-validator";
 
-export class CreateUsuarioDto {
+export class CreateClienteDto {
   @IsNumber()
   @IsPositive()
   @Max(1000)
