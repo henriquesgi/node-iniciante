@@ -8,6 +8,11 @@ import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
 
+/**
+ * Módulo responsável pela autenticação de usuários.
+ * 
+ * Todo o processo é feito utilizando o [Passport.js](https://www.passportjs.org/).
+ */
 @Module({
   imports: [
     JwtModule.register({
