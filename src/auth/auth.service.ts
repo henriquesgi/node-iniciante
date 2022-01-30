@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import * as bcrypt from 'bcrypt';
 
 import { UsuariosService } from '../usuarios/usuarios.service';
 
@@ -14,26 +15,32 @@ export class AuthService {
   ) { }
 
   /**
-   * Método com propósito de buscar um usuário (por meio do {@link usuarioService}) e posteriormente validá-lo.
+   * Procura por um usuário (responsabilidade delagada ao {@link usuarioService}) e caso o usuário
+   * exista é feita uma comparação ([bcrypt](https://github.com/kelektiv/node.bcrypt.js)) entre o senha
+   * fornecida e o hash do usuário.
    * 
    * @param username
    * @param password 
    * 
    * @returns Informações do usuário quando usuário e senha corretos
-   * @returns null quando a usuário ou senha incorretos
+   * @returns null quando usuário ou senha incorretos
    */
   async validateUser(username: string, password: string): Promise<any> {
     const user = this.usuarioService.findOne(username);
 
-    if (user?.password === password) {
-      const { password, ...result } = user;
-      return result;
+    if (user?.password) {
+      const isMatch = await bcrypt.compare(password, user.password);
+
+      if (isMatch) {
+        const { password, ...result } = user;
+        return result;
+      }
     }
     return null;
   }
 
   /**
-   * Método com o propósito de gerar o [JWT](https://jwt.io/) para o usuário.
+   * Gera o [JWT](https://jwt.io/) para o usuário.
    * 
    * @param user 
    * @returns Access Token
