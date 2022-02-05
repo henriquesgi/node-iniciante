@@ -6,9 +6,11 @@ import { AuthGuard } from '@nestjs/passport';
 import { IS_PUBLIC_KEY } from '../constants';
 
 /**
- * Guard (classe) com o propósito de evitar
- * diversas utilizações da constante 'jwt'.
- */
+ * Guard com o propósito de evitar diversas utilizações da constante 'jwt'.
+ * 
+ * Também permite que metainformações sejam adicionadas aos controladores de rota de modo a evitar
+ * que o guard 'jwt' seja aplicado. Veja o método {@link canActivate}.
+  */
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
   /**
@@ -18,9 +20,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     super();
   }
 
-  /**
-   * @ignore
-   */
   canActivate(context: ExecutionContext) {
     const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
       context.getHandler(),

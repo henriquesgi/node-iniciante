@@ -26,11 +26,11 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   }
 
   /**
-   * Método responsável por dizer ao Passport como lidar com o repositório de usuários.
+   * Diz ao Passport como lidar com o repositório de usuários.
    * 
    * Por exemplo: verificar se o usuário existe ou verificar se ele tem credenciais válidas.
    * 
-   * O Passport espera que seja o usuário com suas informações necessárias quando a
+   * O Passport espera que seja retornado o usuário com suas informações necessárias quando a
    * validação for bem-sucedida.
    * 
    * Caso a validação falhe, o esperado é que seja retornado null ou que o devido tratamento
