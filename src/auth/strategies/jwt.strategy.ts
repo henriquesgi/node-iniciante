@@ -33,13 +33,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
    * Por exemplo: verificar se o usuário existe ou verificar se ele tem credenciais válidas.
    * 
    * O Passport espera que seja retornado o usuário com suas informações necessárias quando a
-   * validação for bem-sucedida.
+   * validação for bem-sucedida. O Passport irá adicionar essas informações automaticamente no
+   * objeto Request.
    * 
    * Caso a validação falhe, o esperado é que seja retornado null ou que o devido tratamento
    * seja realizado.
    * 
-   * @param username 
-   * @param password 
+   * @param payload 
    */
   async validate(payload: any) {
     return { username: payload.username };
