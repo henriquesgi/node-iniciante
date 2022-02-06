@@ -1,3 +1,25 @@
-export class Historico {}
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-// TODO: ID para registro PK
+@Entity()
+export class Historico {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column()
+  cnh: string;
+
+  @Column()
+  placa: string;
+
+  @Column()
+  dataDevolucao: Date;
+
+  @Column()
+  dataDevolucaoPrevista: Date;
+
+  @Column()
+  dataLocacao: Date;
+
+  @Column()
+  valorAluguel: number;
+}
