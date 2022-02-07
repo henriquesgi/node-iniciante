@@ -1,25 +1,34 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
 import { CreateCarroDto } from './dto/create-carro.dto';
+import { Carro } from './entities/carro.entity';
 
 @Injectable()
 export class CarrosService {
-  create(createCarroDto: CreateCarroDto) {
-    return 'This action adds a new carro';
+  constructor(
+    @InjectRepository(Carro)
+    private carroRepository: Repository<Carro>,
+  ) { }
+
+  async create(carro: CreateCarroDto): Promise<void> {
+    await this.carroRepository.insert({ ...carro, alugado: false });
   }
 
-  findAll() {
-    return `This action returns all carros`;
+  findAll(): Promise<Carro[]> {
+    return this.carroRepository.find();
   }
 
-  findOne(id: string) {
-    return `This action returns a #${id} carro`;
+  findOne(placa: string): Promise<Carro> {
+    return this.carroRepository.findOne(placa);
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} carro`;
+  async remove(placa: string): Promise<void> {
+    await this.carroRepository.delete(placa);
   }
 
-  update(id: string) {
-    return `Atualização do ${id}`;
+  async update(placa: string, alugado: boolean): Promise<void> {
+    await this.carroRepository.update(placa, { alugado });
   }
 }
