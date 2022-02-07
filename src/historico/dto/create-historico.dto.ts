@@ -18,7 +18,7 @@ export class CreateHistoricoDto {
   placa: string;
 
   @IsDateString()
-  dataDevolucao: Date;
+  dataDevolucaoEfetuada?: Date;
 
   @IsDateString()
   dataDevolucaoPrevista: Date;
