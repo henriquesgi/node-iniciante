@@ -14,6 +14,7 @@ import { LocalStrategy } from './strategies/local.strategy';
  * Todo o processo é feito utilizando o [Passport.js](https://www.passportjs.org/).
  */
 @Module({
+  exports: [AuthService],
   imports: [
     JwtModule.register({
       secret: 'minha-chave',
@@ -22,7 +23,6 @@ import { LocalStrategy } from './strategies/local.strategy';
     PassportModule,
     UsuariosModule,
   ],
-  providers: [AuthService, JwtStrategy, LocalStrategy],
-  exports: [AuthService],
+  providers: [AuthService, JwtStrategy, LocalStrategy]
 })
 export class AuthModule { }
