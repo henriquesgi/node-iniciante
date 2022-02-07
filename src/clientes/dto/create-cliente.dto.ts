@@ -13,7 +13,4 @@ export class CreateClienteDto {
 
   @IsString()
   nome: string;
-
-  @IsString()
-  endereco: string;
 }
