@@ -1,26 +1,30 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
 import { CreateHistoricoDto } from './dto/create-historico.dto';
 import { UpdateHistoricoDto } from './dto/update-historico.dto';
+import { Historico } from './entities/historico.entity';
 
 @Injectable()
 export class HistoricoService {
-  create(createHistoricoDto: CreateHistoricoDto) {
-    return 'This action adds a new historico';
+  constructor(
+    @InjectRepository(Historico)
+    private historicoRepository: Repository<Historico>,
+  ) { }
+
+  async create(historico: CreateHistoricoDto): Promise<void> {
+    await this.historicoRepository.insert(historico);
   }
 
-  findAll() {
-    return `This action returns all historico`;
+  findAll(): Promise<Historico[]> {
+    return this.historicoRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} historico`;
-  }
-
-  update(id: number, updateHistoricoDto: UpdateHistoricoDto) {
-    return `This action updates a #${id} historico`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} historico`;
+  async update(placa: string, historico: UpdateHistoricoDto): Promise<void> {
+    await this.historicoRepository.update(
+      { placa, dataDevolucaoEfetuada: null },
+      historico
+    );
   }
 }
