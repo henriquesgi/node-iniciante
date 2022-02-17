@@ -16,7 +16,7 @@ export class Historico {
   @Column()
   placa: string;
 
-  @Column()
+  @Column({ default: null })
   dataDevolucaoEfetuada: Date;
 
   @Column()
