@@ -12,20 +12,23 @@ export class CreateCarroDto {
   @MaxLength(7)
   placa: string;
 
-  @IsString()
-  @MaxLength(50)
-  modelo: string;
+  @IsBoolean()
+  alugado: boolean;
 
   @IsNumber()
   @IsPositive()
   @Max((new Date()).getUTCFullYear())
   ano: number;
 
+  @IsBoolean()
+  excluido: boolean;
+
+  @IsString()
+  @MaxLength(50)
+  modelo: string;
+
   @IsNumber()
   @IsPositive()
   @Max(5)
   passageiros: number;
-
-  @IsBoolean()
-  alugado: boolean;
 }

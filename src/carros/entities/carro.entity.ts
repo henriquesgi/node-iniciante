@@ -7,15 +7,18 @@ export class Carro {
   @PrimaryColumn()
   placa: string;
 
-  @Column()
-  modelo: string;
+  @Column({ default: false })
+  alugado: boolean;
 
   @Column()
   ano: number;
 
+  @Column({ default: false })
+  excluido: boolean;
+
+  @Column()
+  modelo: string;
+
   @Column()
   passageiros: number;
-
-  @Column({ default: false })
-  alugado: boolean;
 }
