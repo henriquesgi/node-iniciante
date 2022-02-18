@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseBoolPipe,
   Patch,
   Post,
   ValidationPipe
@@ -17,29 +18,31 @@ import { CreateCarroDto } from './dto/create-carro.dto';
 export class CarrosController {
   constructor(private readonly carrosService: CarrosService) { }
 
-  @Delete(':id')
-  remove(@Param('id', StringValidationPipe) id: string) {
-    return this.carrosService.remove(id);
+  @Delete(':placa')
+  remove(@Param('placa', StringValidationPipe) placa: string) {
+    return this.carrosService.remove(placa);
   }
 
   @Get()
   findAll() {
-    // findAll(): Promise<any[]> {
     return this.carrosService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id', StringValidationPipe) id: string) {
-    return this.carrosService.findOne(id);
+  @Get(':placa')
+  findOne(@Param('placa', StringValidationPipe) placa: string) {
+    return this.carrosService.findOne(placa);
   }
 
-  @Patch()
-  update(@Param('id', StringValidationPipe) id: string) {
-    return this.carrosService.update(id);
+  @Patch(':placa')
+  update(
+    @Param('placa', StringValidationPipe) placa: string,
+    @Param('alugado', ParseBoolPipe) alugado: boolean
+  ) {
+    return this.carrosService.update(placa, alugado);
   }
 
   @Post()
-  create(@Body(ValidationPipe) createCarroDto: CreateCarroDto) {
-    return this.carrosService.create(createCarroDto);
+  create(@Body(ValidationPipe) carro: CreateCarroDto) {
+    return this.carrosService.create(carro);
   }
 }

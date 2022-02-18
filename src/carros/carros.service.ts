@@ -25,7 +25,7 @@ export class CarrosService {
   }
 
   async remove(placa: string): Promise<void> {
-    await this.carroRepository.delete(placa);
+    await this.carroRepository.update(placa, { excluido: true });
   }
 
   async update(placa: string, alugado: boolean): Promise<void> {
