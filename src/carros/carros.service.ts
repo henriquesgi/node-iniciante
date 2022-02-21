@@ -13,7 +13,7 @@ export class CarrosService {
   ) { }
 
   async create(carro: CreateCarroDto): Promise<void> {
-    await this.carroRepository.insert({ ...carro, alugado: false });
+    await this.carroRepository.insert({ ...carro });
   }
 
   findAll(): Promise<Carro[]> {

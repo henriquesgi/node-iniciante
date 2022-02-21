@@ -36,7 +36,7 @@ export class CarrosController {
   @Patch(':placa')
   update(
     @Param('placa', StringValidationPipe) placa: string,
-    @Param('alugado', ParseBoolPipe) alugado: boolean
+    @Body('alugado', ParseBoolPipe) alugado: boolean
   ) {
     return this.carrosService.update(placa, alugado);
   }

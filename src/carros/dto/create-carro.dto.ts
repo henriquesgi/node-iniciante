@@ -1,5 +1,4 @@
 import {
-  IsBoolean,
   IsNumber,
   IsPositive,
   IsString,
@@ -12,16 +11,10 @@ export class CreateCarroDto {
   @MaxLength(7)
   placa: string;
 
-  @IsBoolean()
-  alugado: boolean;
-
   @IsNumber()
   @IsPositive()
   @Max((new Date()).getUTCFullYear())
   ano: number;
-
-  @IsBoolean()
-  excluido: boolean;
 
   @IsString()
   @MaxLength(50)
