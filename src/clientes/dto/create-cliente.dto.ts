@@ -2,7 +2,8 @@ import {
   IsNumber,
   IsPositive,
   IsString,
-  Max
+  Max,
+  MaxLength
 } from "class-validator";
 
 export class CreateClienteDto {
@@ -12,5 +13,10 @@ export class CreateClienteDto {
   cnh: number;
 
   @IsString()
+  @MaxLength(50)
+  endereco: string;
+
+  @IsString()
+  @MaxLength(50)
   nome: string;
 }

@@ -23,8 +23,4 @@ export class ClientesService {
   findOne(cnh: number): Promise<Cliente> {
     return this.clienteRepository.findOne(cnh);
   }
-
-  async remove(cnh: number): Promise<void> {
-    await this.clienteRepository.delete(cnh);
-  }
 }
