@@ -2,10 +2,10 @@
 import { PipeTransform, Injectable, ArgumentMetadata, BadRequestException } from '@nestjs/common';
 
 @Injectable()
-export class StringValidationPipe implements PipeTransform {
+export class PlacaValidationPipe implements PipeTransform {
   transform(value: string, metadata: ArgumentMetadata) {
 
-    if (typeof value !== 'string' || value.length > 7) {
+    if (typeof value !== 'string' || value.length !== 7) {
       throw new BadRequestException('Requisição inválida')
     }
 
