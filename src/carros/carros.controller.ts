@@ -10,7 +10,7 @@ import {
   ValidationPipe
 } from '@nestjs/common';
 
-import { StringValidationPipe } from 'src/common/pipes/string-validation.pipe';
+import { PlacaValidationPipe } from 'src/common/pipes/placa-validation.pipe';
 import { CarrosService } from './carros.service';
 import { CreateCarroDto } from './dto/create-carro.dto';
 
@@ -19,7 +19,7 @@ export class CarrosController {
   constructor(private readonly carrosService: CarrosService) { }
 
   @Delete(':placa')
-  remove(@Param('placa', StringValidationPipe) placa: string) {
+  remove(@Param('placa', PlacaValidationPipe) placa: string) {
     return this.carrosService.remove(placa);
   }
 
@@ -29,13 +29,13 @@ export class CarrosController {
   }
 
   @Get(':placa')
-  findOne(@Param('placa', StringValidationPipe) placa: string) {
+  findOne(@Param('placa', PlacaValidationPipe) placa: string) {
     return this.carrosService.findOne(placa);
   }
 
   @Patch(':placa')
   update(
-    @Param('placa', StringValidationPipe) placa: string,
+    @Param('placa', PlacaValidationPipe) placa: string,
     @Body('alugado', ParseBoolPipe) alugado: boolean
   ) {
     return this.carrosService.update(placa, alugado);

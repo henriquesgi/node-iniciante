@@ -8,7 +8,7 @@ import {
   ValidationPipe
 } from '@nestjs/common';
 
-import { NumberValidationPipe } from 'src/common/pipes/number-validation.pipe';
+import { CnhValidationPipe } from 'src/common/pipes/cnh-validation.pipe';
 import { ClientesService } from './clientes.service';
 import { CreateClienteDto } from './dto/create-cliente.dto';
 
@@ -22,7 +22,7 @@ export class ClientesController {
   }
 
   @Get(':cnh')
-  findOne(@Param('cnh', NumberValidationPipe, ParseIntPipe) cnh: number) {
+  findOne(@Param('cnh', CnhValidationPipe, ParseIntPipe) cnh: number) {
     return this.usuariosService.findOne(cnh);
   }
 
