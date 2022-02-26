@@ -2,13 +2,14 @@ import {
   IsNumber,
   IsPositive,
   IsString,
+  Length,
   Max,
   MaxLength
 } from "class-validator";
 
 export class CreateCarroDto {
   @IsString()
-  @MaxLength(7)
+  @Length(7)
   placa: string;
 
   @IsNumber()
