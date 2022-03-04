@@ -3,8 +3,8 @@ import {
   IsNumber,
   IsPositive,
   IsString,
-  Max,
-  MaxLength
+  Length,
+  Max
 } from "class-validator";
 
 export class CreateHistoricoDto {
@@ -14,17 +14,11 @@ export class CreateHistoricoDto {
   cnh: string;
 
   @IsString()
-  @MaxLength(7)
+  @Length(7)
   placa: string;
 
   @IsDateString()
-  dataDevolucaoEfetuada?: Date;
-
-  @IsDateString()
   dataDevolucaoPrevista: Date;
-
-  @IsDateString()
-  dataLocacao: Date;
 
   @IsNumber()
   @IsPositive()
