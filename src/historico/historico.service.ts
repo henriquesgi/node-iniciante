@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { CreateHistoricoDto } from './dto/create-historico.dto';
-import { UpdateHistoricoDto } from './dto/update-historico.dto';
 import { Historico } from './entities/historico.entity';
 
 @Injectable()
@@ -14,17 +13,21 @@ export class HistoricoService {
   ) { }
 
   async create(historico: CreateHistoricoDto): Promise<void> {
-    await this.historicoRepository.insert(historico);
+    await this.historicoRepository.insert({
+      ...historico,
+      dataDevolucaoPrevista: new Date(historico.dataDevolucaoPrevista),
+      dataLocacao: new Date()
+    });
   }
 
   findAll(): Promise<Historico[]> {
     return this.historicoRepository.find();
   }
 
-  async update(placa: string, historico: UpdateHistoricoDto): Promise<void> {
+  async update(id: number): Promise<void> {
     await this.historicoRepository.update(
-      { placa, dataDevolucaoEfetuada: null },
-      historico
-    );
+      id,
+      { dataDevolucaoEfetuada: new Date() }
+    )
   }
 }
