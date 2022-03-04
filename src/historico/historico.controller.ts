@@ -3,13 +3,15 @@ import {
   Controller,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
-  Post
+  Post,
+  ValidationPipe
 } from '@nestjs/common';
 
 import { CreateHistoricoDto } from './dto/create-historico.dto';
-import { UpdateHistoricoDto } from './dto/update-historico.dto';
 import { HistoricoService } from './historico.service';
+
 
 @Controller('historico')
 export class HistoricoController {
@@ -21,12 +23,12 @@ export class HistoricoController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateHistoricoDto: UpdateHistoricoDto) {
-    return this.historicoService.update(+id, updateHistoricoDto);
+  update(@Param('id', ParseIntPipe) id: number) {
+    return this.historicoService.update(id);
   }
 
   @Post()
-  create(@Body() createHistoricoDto: CreateHistoricoDto) {
-    return this.historicoService.create(createHistoricoDto);
+  create(@Body(ValidationPipe) historico: CreateHistoricoDto) {
+    return this.historicoService.create(historico);
   }
 }
