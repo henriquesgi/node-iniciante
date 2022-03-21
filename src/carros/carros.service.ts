@@ -12,8 +12,12 @@ export class CarrosService {
     private carroRepository: Repository<Carro>,
   ) { }
 
-  async create(carro: CreateCarroDto): Promise<void> {
-    await this.carroRepository.insert({ ...carro });
+  async create(carro: CreateCarroDto): Promise<void | string> {
+    try {
+      await this.carroRepository.insert({ ...carro });
+    } catch (error) {
+      return error.code
+    }
   }
 
   findAll(): Promise<Carro[]> {
@@ -24,11 +28,16 @@ export class CarrosService {
     return this.carroRepository.findOne(placa);
   }
 
-  async remove(placa: string): Promise<void> {
-    await this.carroRepository.update(placa, { excluido: true });
+  async remove(placa: string): Promise<number> {
+    const query = await this.carroRepository.update(
+      { placa, excluido: false },
+      { excluido: true }
+    );
+    return query.affected
   }
 
-  async update(placa: string, alugado: boolean): Promise<void> {
-    await this.carroRepository.update(placa, { alugado });
+  async update(placa: string, alugado: boolean): Promise<number> {
+    const query = await this.carroRepository.update(placa, { alugado });
+    return query.affected
   }
 }
