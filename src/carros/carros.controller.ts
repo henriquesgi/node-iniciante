@@ -1,48 +1,87 @@
 import {
   Body,
+  ConflictException,
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   ParseBoolPipe,
   Patch,
   Post,
   ValidationPipe
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiBody, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { PlacaValidationPipe } from 'src/common/pipes/placa-validation.pipe';
 import { CarrosService } from './carros.service';
 import { CreateCarroDto } from './dto/create-carro.dto';
 
 @Controller('carros')
+@ApiBearerAuth()
+@ApiTags('Carros')
 export class CarrosController {
   constructor(private readonly carrosService: CarrosService) { }
 
   @Delete(':placa')
-  remove(@Param('placa', PlacaValidationPipe) placa: string) {
-    return this.carrosService.remove(placa);
+  @ApiParam({ name: 'placa', type: String })
+  @ApiResponse({ status: 200, description: 'Representação excluída.' })
+  @ApiResponse({ status: 400, description: 'Representação inválida.' })
+  @ApiResponse({ status: 404, description: 'Representação não encontrada.' })
+  async remove(@Param('placa', PlacaValidationPipe) placa: string) {
+    const request = await this.carrosService.remove(placa);
+    if (request === 0) {
+      throw new NotFoundException()
+    }
   }
 
   @Get()
+  @ApiResponse({ status: 200, description: 'Array contendo todas as representações.' })
   findAll() {
     return this.carrosService.findAll();
   }
 
   @Get(':placa')
-  findOne(@Param('placa', PlacaValidationPipe) placa: string) {
-    return this.carrosService.findOne(placa);
+  @ApiParam({ name: 'placa', type: String })
+  @ApiResponse({ status: 200, description: 'Representação encontrada.' })
+  @ApiResponse({ status: 400, description: 'Representação inválida.' })
+  @ApiResponse({ status: 404, description: 'Representação não encontrada.' })
+  async findOne(@Param('placa', PlacaValidationPipe) placa: string) {
+    const request = await this.carrosService.findOne(placa);
+    if (!request) {
+      throw new NotFoundException()
+    }
+    return request
   }
 
   @Patch(':placa')
-  update(
-    @Param('placa', PlacaValidationPipe) placa: string,
-    @Body('alugado', ParseBoolPipe) alugado: boolean
+  @ApiBody({ schema: { type: 'object', properties: { alugado: { type: 'boolean' } } } })
+  @ApiParam({ name: 'placa', type: String })
+  @ApiResponse({ status: 200, description: 'Representação modificada.' })
+  @ApiResponse({ status: 400, description: 'Representação inválida.' })
+  @ApiResponse({ status: 404, description: 'Representação não encontrada.' })
+  async update(
+    @Body('alugado', ParseBoolPipe) alugado: boolean,
+    @Param('placa', PlacaValidationPipe) placa: string
   ) {
-    return this.carrosService.update(placa, alugado);
+    const request = await this.carrosService.update(placa, alugado);
+    if (request === 0) {
+      throw new NotFoundException()
+    }
   }
 
   @Post()
-  create(@Body(ValidationPipe) carro: CreateCarroDto) {
-    return this.carrosService.create(carro);
+  @ApiBody({ type: CreateCarroDto })
+  @ApiResponse({ status: 201, description: 'Representação criada.' })
+  @ApiResponse({ status: 400, description: 'Representação inválida.' })
+  @ApiResponse({ status: 409, description: 'Representação já existe.' })
+  async create(@Body(ValidationPipe) carro: CreateCarroDto) {
+    const request = await this.carrosService.create(carro);
+    switch (request) {
+      case '23505':
+        throw new ConflictException()
+      default:
+        break;
+    }
   }
 }
