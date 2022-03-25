@@ -12,8 +12,12 @@ export class ClientesService {
     private clienteRepository: Repository<Cliente>,
   ) { }
 
-  async create(cliente: CreateClienteDto): Promise<void> {
-    await this.clienteRepository.insert(cliente);
+  async create(cliente: CreateClienteDto): Promise<void | string> {
+    try {
+      await this.clienteRepository.insert(cliente);
+    } catch (error) {
+      return error.code
+    }
   }
 
   findAll(): Promise<Cliente[]> {
