@@ -3,7 +3,8 @@ import { Cliente } from 'src/clientes/entities/cliente.entity';
 
 import {
   Column,
-  Entity, ManyToOne,
+  Entity,
+  ManyToOne,
   PrimaryGeneratedColumn
 } from 'typeorm';
 
@@ -14,7 +15,7 @@ export class Historico {
 
   @ManyToOne((type) => Cliente, (cliente) => cliente.cnh)
   @Column()
-  cnh: string;
+  cnh: number;
 
   @ManyToOne((type) => Carro, (carro) => carro.placa)
   @Column()
@@ -29,6 +30,14 @@ export class Historico {
   @Column({ type: 'timestamptz' })
   dataLocacao: Date;
 
-  @Column()
+  @Column({
+    type: 'numeric',
+    precision: 6,
+    scale: 2,
+    transformer: {
+      from: (value: string): number => Number(value),
+      to: (value: number): number => value
+    }
+  })
   valorAluguel: number;
 }
