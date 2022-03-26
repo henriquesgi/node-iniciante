@@ -12,22 +12,27 @@ export class HistoricoService {
     private historicoRepository: Repository<Historico>,
   ) { }
 
-  async create(historico: CreateHistoricoDto): Promise<void> {
-    await this.historicoRepository.insert({
-      ...historico,
-      dataDevolucaoPrevista: new Date(historico.dataDevolucaoPrevista),
-      dataLocacao: new Date()
-    });
+  async create(historico: CreateHistoricoDto): Promise<void | string> {
+    try {
+      await this.historicoRepository.insert({
+        ...historico,
+        dataDevolucaoPrevista: new Date(historico.dataDevolucaoPrevista),
+        dataLocacao: new Date()
+      });
+    } catch (error) {
+      return error.code
+    }
   }
 
   findAll(): Promise<Historico[]> {
     return this.historicoRepository.find();
   }
 
-  async update(id: number): Promise<void> {
-    await this.historicoRepository.update(
+  async update(id: number): Promise<number> {
+    const query = await this.historicoRepository.update(
       id,
       { dataDevolucaoEfetuada: new Date() }
     )
+    return query.affected
   }
 }
