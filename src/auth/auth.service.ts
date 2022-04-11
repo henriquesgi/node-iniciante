@@ -19,20 +19,20 @@ export class AuthService {
    * exista é feita uma comparação ([bcrypt](https://github.com/kelektiv/node.bcrypt.js)) entre o senha
    * fornecida e o hash do usuário.
    * 
-   * @param username
-   * @param password 
+   * @param id
+   * @param senha 
    * 
    * @returns Informações do usuário quando usuário e senha corretos
    * @returns null quando usuário ou senha incorretos
    */
-  async validateUser(username: string, password: string): Promise<any> {
-    const user = this.usuarioService.findOne(username);
+  async validateUser(id: string, senha: string): Promise<any> {
+    const user = await this.usuarioService.findOne(id);
 
-    if (user?.password) {
-      const isMatch = await bcrypt.compare(password, user.password);
+    if (user?.senha) {
+      const isMatch = await bcrypt.compare(senha, user.senha);
 
       if (isMatch) {
-        const { password, ...result } = user;
+        const { senha, ...result } = user;
         return result;
       }
     }
@@ -46,7 +46,7 @@ export class AuthService {
    * @returns Access Token
    */
   async login(user: any) {
-    const payload = { username: user.username };
+    const payload = { id: user.id };
     return {
       access_token: this.jwtService.sign(payload),
     };
