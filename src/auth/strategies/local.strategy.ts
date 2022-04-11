@@ -22,7 +22,10 @@ import { AuthService } from '../auth.service';
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(private authService: AuthService) {
-    super();
+    super({
+      usernameField: 'id',
+      passwordField: 'senha'
+    });
   }
 
   /**
@@ -37,13 +40,13 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
    * Caso a validação falhe, o esperado é que seja retornado null ou que o devido tratamento
    * seja realizado.
    * 
-   * @param username 
-   * @param password 
+   * @param id 
+   * @param senha 
    */
-  async validate(username: string, password: string): Promise<any> {
-    const user = await this.authService.validateUser(username, password);
+  async validate(id: string, senha: string): Promise<any> {
+    const user = await this.authService.validateUser(id, senha);
     if (!user) {
-      throw new UnauthorizedException('usuario incorreto ou senha incorreta');
+      throw new UnauthorizedException();
     }
     return user;
   }
