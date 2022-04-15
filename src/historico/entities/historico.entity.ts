@@ -1,39 +1,27 @@
-import { Carro } from 'src/carros/entities/carro.entity';
-import { Cliente } from 'src/clientes/entities/cliente.entity';
-
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn
-} from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Historico {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id: number;
 
-  @ManyToOne((type) => Cliente, (cliente) => cliente.cnh)
   @Column()
   cnh: number;
 
-  @ManyToOne((type) => Carro, (carro) => carro.placa)
   @Column()
   placa: string;
 
-  @Column({ type: 'timestamptz', default: null })
+  @Column({ name: 'datadevolucaoefetuada' })
   dataDevolucaoEfetuada: Date;
 
-  @Column({ type: 'timestamptz' })
+  @Column({ name: 'datadevolucaoprevista' })
   dataDevolucaoPrevista: Date;
 
-  @Column({ type: 'timestamptz' })
+  @Column({ name: 'datalocacao' })
   dataLocacao: Date;
 
   @Column({
-    type: 'numeric',
-    precision: 6,
-    scale: 2,
+    name: 'valoraluguel',
     transformer: {
       from: (value: string): number => Number(value),
       to: (value: number): number => value

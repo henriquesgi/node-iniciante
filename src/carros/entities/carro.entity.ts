@@ -1,19 +1,17 @@
-import { Historico } from 'src/historico/entities/historico.entity';
-import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Carro {
-  @OneToMany((type) => Historico, (historico) => historico.placa)
   @PrimaryColumn()
   placa: string;
 
-  @Column({ default: false })
+  @Column()
   alugado: boolean;
 
   @Column()
   ano: number;
 
-  @Column({ default: false })
+  @Column()
   excluido: boolean;
 
   @Column()
