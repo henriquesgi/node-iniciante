@@ -46,6 +46,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   async validate(id: string, senha: string): Promise<any> {
     const user = await this.authService.validateUser(id, senha);
     if (!user) {
+      // @nestjs/passport não fornece a opção para utilizar o cabeçalho WWW-Authenticate
       throw new UnauthorizedException();
     }
     return user;
