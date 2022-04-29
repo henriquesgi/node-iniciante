@@ -7,11 +7,13 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Query,
   ValidationPipe
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiBody, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { CnhValidationPipe } from 'src/common/pipes/cnh-validation.pipe';
+import { PositivoValidationPipe } from 'src/common/pipes/positivo-validation.pipe';
 import { ClientesService } from './clientes.service';
 import { CreateClienteDto } from './dto/create-cliente.dto';
 
@@ -22,13 +24,14 @@ export class ClientesController {
   constructor(private readonly usuariosService: ClientesService) { }
 
   @Get()
+  @ApiQuery({ name: 'pagina' })
   @ApiResponse({ status: 200, description: 'Array contendo todas as representações.' })
-  findAll() {
-    return this.usuariosService.findAll();
+  findAll(@Query('pagina', PositivoValidationPipe) pagina: number) {
+    return this.usuariosService.findAll(pagina);
   }
 
   @Get(':cnh')
-  @ApiParam({ name: 'cnh', type: Number })
+  @ApiParam({ name: 'cnh' })
   @ApiResponse({ status: 200, description: 'Representação encontrada.' })
   @ApiResponse({ status: 400, description: 'Representação inválida.' })
   @ApiResponse({ status: 404, description: 'Representação não encontrada.' })

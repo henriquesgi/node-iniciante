@@ -20,8 +20,8 @@ export class CarrosService {
     }
   }
 
-  findAll(): Promise<Carro[]> {
-    return this.carroRepository.find();
+  findAll(pagina: number = 0): Promise<Carro[]> {
+    return this.carroRepository.find({ take: 25, skip: pagina * 25 });
   }
 
   findOne(placa: string): Promise<Carro> {

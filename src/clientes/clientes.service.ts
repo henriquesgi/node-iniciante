@@ -20,8 +20,8 @@ export class ClientesService {
     }
   }
 
-  findAll(): Promise<Cliente[]> {
-    return this.clienteRepository.find();
+  findAll(pagina: number = 0): Promise<Cliente[]> {
+    return this.clienteRepository.find({ take: 25, skip: pagina * 25 });
   }
 
   findOne(cnh: number): Promise<Cliente> {

@@ -9,11 +9,13 @@ import {
   ParseBoolPipe,
   Patch,
   Post,
+  Query,
   ValidationPipe
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiBody, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { PlacaValidationPipe } from 'src/common/pipes/placa-validation.pipe';
+import { PositivoValidationPipe } from 'src/common/pipes/positivo-validation.pipe';
 import { CarrosService } from './carros.service';
 import { CreateCarroDto } from './dto/create-carro.dto';
 
@@ -24,7 +26,7 @@ export class CarrosController {
   constructor(private readonly carrosService: CarrosService) { }
 
   @Delete(':placa')
-  @ApiParam({ name: 'placa', type: String })
+  @ApiParam({ name: 'placa' })
   @ApiResponse({ status: 200, description: 'Representação excluída.' })
   @ApiResponse({ status: 400, description: 'Representação inválida.' })
   @ApiResponse({ status: 404, description: 'Representação não encontrada.' })
@@ -36,13 +38,14 @@ export class CarrosController {
   }
 
   @Get()
+  @ApiQuery({ name: 'pagina' })
   @ApiResponse({ status: 200, description: 'Array contendo todas as representações.' })
-  findAll() {
-    return this.carrosService.findAll();
+  findAll(@Query('pagina', PositivoValidationPipe) pagina: number) {
+    return this.carrosService.findAll(pagina);
   }
 
   @Get(':placa')
-  @ApiParam({ name: 'placa', type: String })
+  @ApiParam({ name: 'placa' })
   @ApiResponse({ status: 200, description: 'Representação encontrada.' })
   @ApiResponse({ status: 400, description: 'Representação inválida.' })
   @ApiResponse({ status: 404, description: 'Representação não encontrada.' })
@@ -56,7 +59,7 @@ export class CarrosController {
 
   @Patch(':placa')
   @ApiBody({ schema: { type: 'object', properties: { alugado: { type: 'boolean' } } } })
-  @ApiParam({ name: 'placa', type: String })
+  @ApiParam({ name: 'placa' })
   @ApiResponse({ status: 200, description: 'Representação modificada.' })
   @ApiResponse({ status: 400, description: 'Representação inválida.' })
   @ApiResponse({ status: 404, description: 'Representação não encontrada.' })

@@ -24,8 +24,8 @@ export class HistoricoService {
     }
   }
 
-  findAll(): Promise<Historico[]> {
-    return this.historicoRepository.find();
+  findAll(pagina: number = 0): Promise<Historico[]> {
+    return this.historicoRepository.find({ take: 25, skip: pagina * 25 });
   }
 
   async update(id: number): Promise<number> {

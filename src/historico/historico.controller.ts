@@ -8,10 +8,12 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
   UnprocessableEntityException,
   ValidationPipe
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiBody, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { PositivoValidationPipe } from 'src/common/pipes/positivo-validation.pipe';
 
 import { CreateHistoricoDto } from './dto/create-historico.dto';
 import { HistoricoService } from './historico.service';
@@ -24,13 +26,14 @@ export class HistoricoController {
   constructor(private readonly historicoService: HistoricoService) { }
 
   @Get()
+  @ApiQuery({ name: 'pagina' })
   @ApiResponse({ status: 200, description: 'Array contendo todas as representações.' })
-  findAll() {
-    return this.historicoService.findAll();
+  findAll(@Query('pagina', PositivoValidationPipe) pagina: number) {
+    return this.historicoService.findAll(pagina);
   }
 
   @Patch(':id')
-  @ApiParam({ name: 'id', type: Number })
+  @ApiParam({ name: 'id' })
   @ApiResponse({ status: 200, description: 'Representação modificada.' })
   @ApiResponse({ status: 400, description: 'Representação inválida.' })
   @ApiResponse({ status: 404, description: 'Representação não encontrada.' })
