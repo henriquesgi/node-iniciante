@@ -17,7 +17,7 @@ export class CarrosService {
    * 
    * @param carro
    * 
-   * @returns Void quando o usuário é criado.
+   * @returns Void quando o registro é criado.
    * @returns Um código em string quando algum erro acontecer durante o insert.
    */
   async create(carro: CreateCarroDto): Promise<void | string> {
