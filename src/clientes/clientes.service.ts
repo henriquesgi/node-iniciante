@@ -37,8 +37,8 @@ export class ClientesService {
    * 
    * @returns Array contendo de 0 até 25 registros.
    */
-  findAll(pagina: number = 0): Promise<Cliente[]> {
-    return this.clienteRepository.find({ take: 25, skip: pagina * 25 });
+  async findAll(pagina: number = 0): Promise<Cliente[] | []> {
+    return await this.clienteRepository.find({ take: 25, skip: pagina * 25 });
   }
 
   /**
@@ -48,7 +48,7 @@ export class ClientesService {
    * 
    * @returns Caso encontrado, 1 registro.
    */
-  findOne(cnh: number): Promise<Cliente> {
-    return this.clienteRepository.findOne(cnh);
+  async findOne(cnh: number): Promise<Cliente | undefined> {
+    return await this.clienteRepository.findOne(cnh);
   }
 }

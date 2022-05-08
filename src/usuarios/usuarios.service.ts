@@ -11,7 +11,14 @@ export class UsuariosService {
     private usuarioRepository: Repository<Usuario>,
   ) { }
 
-  findOne(id: string) {
-    return this.usuarioRepository.findOne(id);
+  /**
+   * Busca 1 registro na tabela {@link Usuario}.
+   * 
+   * @param id Identificação do registro, PK.
+   * 
+   * @returns Caso encontrado, 1 registro.
+   */
+  async findOne(id: string) {
+    return await this.usuarioRepository.findOne(id);
   }
 }

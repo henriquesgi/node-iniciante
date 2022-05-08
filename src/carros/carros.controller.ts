@@ -40,8 +40,8 @@ export class CarrosController {
   @Get()
   @ApiQuery({ name: 'pagina' })
   @ApiResponse({ status: 200, description: 'Array contendo todas as representações.' })
-  findAll(@Query('pagina', PositivoValidationPipe) pagina: number) {
-    return this.carrosService.findAll(pagina);
+  async findAll(@Query('pagina', PositivoValidationPipe) pagina: number) {
+    return await this.carrosService.findAll(pagina);
   }
 
   @Get(':placa')

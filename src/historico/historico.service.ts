@@ -41,8 +41,8 @@ export class HistoricoService {
    * 
    * @returns Array contendo de 0 até 25 registros.
    */
-  findAll(pagina: number = 0): Promise<Historico[]> {
-    return this.historicoRepository.find({ take: 25, skip: pagina * 25 });
+  async findAll(pagina: number = 0): Promise<Historico[] | []> {
+    return await this.historicoRepository.find({ take: 25, skip: pagina * 25 });
   }
 
   /**

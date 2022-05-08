@@ -26,8 +26,8 @@ export class ClientesController {
   @Get()
   @ApiQuery({ name: 'pagina' })
   @ApiResponse({ status: 200, description: 'Array contendo todas as representações.' })
-  findAll(@Query('pagina', PositivoValidationPipe) pagina: number) {
-    return this.usuariosService.findAll(pagina);
+  async findAll(@Query('pagina', PositivoValidationPipe) pagina: number) {
+    return await this.usuariosService.findAll(pagina);
   }
 
   @Get(':cnh')

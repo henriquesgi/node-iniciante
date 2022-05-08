@@ -37,8 +37,8 @@ export class CarrosService {
    * 
    * @returns Array contendo de 0 até 25 registros.
    */
-  findAll(pagina: number): Promise<Carro[]> {
-    return this.carroRepository.find({ take: 25, skip: pagina * 25 });
+  async findAll(pagina: number): Promise<Carro[] | []> {
+    return await this.carroRepository.find({ take: 25, skip: pagina * 25 });
   }
 
   /**
@@ -48,8 +48,8 @@ export class CarrosService {
    * 
    * @returns Caso encontrado, 1 registro.
    */
-  findOne(placa: string): Promise<Carro> {
-    return this.carroRepository.findOne(placa);
+  async findOne(placa: string): Promise<Carro | undefined> {
+    return await this.carroRepository.findOne(placa);
   }
 
   /**

@@ -28,8 +28,8 @@ export class HistoricoController {
   @Get()
   @ApiQuery({ name: 'pagina' })
   @ApiResponse({ status: 200, description: 'Array contendo todas as representações.' })
-  findAll(@Query('pagina', PositivoValidationPipe) pagina: number) {
-    return this.historicoService.findAll(pagina);
+  async findAll(@Query('pagina', PositivoValidationPipe) pagina: number) {
+    return await this.historicoService.findAll(pagina);
   }
 
   @Patch(':id')
