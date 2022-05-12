@@ -1,4 +1,3 @@
-
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
@@ -10,7 +9,7 @@ import { LocalStrategy } from './strategies/local.strategy';
 
 /**
  * Módulo responsável pela autenticação de usuários.
- * 
+ *
  * Todo o processo é feito utilizando o [Passport.js](https://www.passportjs.org/).
  */
 @Module({
@@ -23,6 +22,6 @@ import { LocalStrategy } from './strategies/local.strategy';
     PassportModule,
     UsuariosModule,
   ],
-  providers: [AuthService, JwtStrategy, LocalStrategy]
+  providers: [AuthService, JwtStrategy, LocalStrategy],
 })
-export class AuthModule { }
+export class AuthModule {}

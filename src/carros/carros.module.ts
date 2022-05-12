@@ -8,6 +8,6 @@ import { Carro } from './entities/carro.entity';
 @Module({
   controllers: [CarrosController],
   imports: [TypeOrmModule.forFeature([Carro])],
-  providers: [CarrosService]
+  providers: [CarrosService],
 })
-export class CarrosModule { }
+export class CarrosModule {}

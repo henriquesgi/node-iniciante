@@ -1,11 +1,11 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsNumber,
   IsPositive,
   IsString,
   Max,
-  MaxLength
-} from "class-validator";
+  MaxLength,
+} from 'class-validator';
 
 export class CreateClienteDto {
   @IsNumber()
@@ -13,7 +13,7 @@ export class CreateClienteDto {
   @Max(1000)
   @ApiProperty({
     description: 'Identificação única do cliente.',
-    type: Number
+    type: Number,
   })
   cnh: number;
 
@@ -21,7 +21,7 @@ export class CreateClienteDto {
   @MaxLength(50)
   @ApiProperty({
     description: 'Endereço do cliente.',
-    type: String
+    type: String,
   })
   endereco: string;
 
@@ -29,7 +29,7 @@ export class CreateClienteDto {
   @MaxLength(50)
   @ApiProperty({
     description: 'Nome do cliente.',
-    type: String
+    type: String,
   })
   nome: string;
 }

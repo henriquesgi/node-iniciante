@@ -9,13 +9,13 @@ export class UsuariosService {
   constructor(
     @InjectRepository(Usuario)
     private usuarioRepository: Repository<Usuario>,
-  ) { }
+  ) {}
 
   /**
    * Busca 1 registro na tabela {@link Usuario}.
-   * 
+   *
    * @param id Identificação do registro, PK.
-   * 
+   *
    * @returns Caso encontrado, 1 registro.
    */
   async findOne(id: string) {

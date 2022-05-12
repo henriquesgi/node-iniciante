@@ -24,8 +24,8 @@ export class Historico {
     name: 'valoraluguel',
     transformer: {
       from: (value: string): number => Number(value),
-      to: (value: number): number => value
-    }
+      to: (value: number): number => value,
+    },
   })
   valorAluguel: number;
 }

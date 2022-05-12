@@ -28,16 +28,16 @@ import { UsuariosModule } from './usuarios/usuarios.module';
       synchronize: false,
       migrations: ['migrations/*js'],
       cli: {
-        migrationsDir: './src/db/migration'
-      }
-    })
+        migrationsDir: './src/db/migration',
+      },
+    }),
   ],
   controllers: [AppController],
   providers: [
     {
       provide: APP_GUARD,
-      useClass: JwtAuthGuard
-    }
-  ]
+      useClass: JwtAuthGuard,
+    },
+  ],
 })
-export class AppModule { }
+export class AppModule {}

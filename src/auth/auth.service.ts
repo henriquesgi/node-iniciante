@@ -12,16 +12,16 @@ export class AuthService {
   constructor(
     private jwtService: JwtService,
     private usuarioService: UsuariosService,
-  ) { }
+  ) {}
 
   /**
    * Procura por um usuário (responsabilidade delagada ao {@link usuarioService}) e caso o usuário
    * exista é feita uma comparação ([bcrypt](https://github.com/kelektiv/node.bcrypt.js)) entre o senha
    * fornecida e o hash do usuário.
-   * 
+   *
    * @param id
-   * @param senha 
-   * 
+   * @param senha
+   *
    * @returns Informações do usuário quando usuário e senha corretos
    * @returns null quando usuário ou senha incorretos
    */
@@ -41,8 +41,8 @@ export class AuthService {
 
   /**
    * Gera o [JWT](https://jwt.io/) para o usuário.
-   * 
-   * @param user 
+   *
+   * @param user
    * @returns Access Token
    */
   async login(user: any) {

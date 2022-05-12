@@ -4,7 +4,7 @@ import {
   Post,
   Req,
   Res,
-  UseGuards
+  UseGuards,
 } from '@nestjs/common';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Request, Response } from 'express';
@@ -16,12 +16,17 @@ import { LocalAuthGuard } from './auth/guards/local-auth.guard';
 @Controller()
 @ApiTags('/')
 export class AppController {
-  constructor(private readonly authService: AuthService) { }
+  constructor(private readonly authService: AuthService) {}
 
   @Post('auth/login')
   @SkipJwt()
   @UseGuards(LocalAuthGuard)
-  @ApiBody({ schema: { type: 'object', properties: { id: { type: 'string' }, senha: { type: 'string' } } } })
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: { id: { type: 'string' }, senha: { type: 'string' } },
+    },
+  })
   @ApiResponse({ status: 200, description: 'Login bem sucedido.' })
   @ApiResponse({ status: 401, description: 'Login sem sucesso.' })
   async login(@Req() req: Request, @Res() res: Response) {

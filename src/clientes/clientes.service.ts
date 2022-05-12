@@ -10,13 +10,13 @@ export class ClientesService {
   constructor(
     @InjectRepository(Cliente)
     private clienteRepository: Repository<Cliente>,
-  ) { }
+  ) {}
 
   /**
    * Cria um registro na tabela {@link Cliente}
-   * 
+   *
    * @param cliente
-   * 
+   *
    * @returns Void quando o registro é criado.
    * @returns Um código em string quando algum erro acontecer durante o insert.
    */
@@ -24,28 +24,28 @@ export class ClientesService {
     try {
       await this.clienteRepository.insert(cliente);
     } catch (error) {
-      return error.code
+      return error.code;
     }
   }
 
   /**
    * Busca todos os registros na tabela {@link Cliente}.
-   * 
+   *
    * A paginação garante que sejam retornados até 25 registros por página.
-   * 
+   *
    * @param pagina
-   * 
+   *
    * @returns Array contendo de 0 até 25 registros.
    */
-  async findAll(pagina: number = 0): Promise<Cliente[] | []> {
+  async findAll(pagina = 0): Promise<Cliente[] | []> {
     return await this.clienteRepository.find({ take: 25, skip: pagina * 25 });
   }
 
   /**
    * Busca 1 registro na tabela {@link Cliente}.
-   * 
+   *
    * @param cnh Identificação do registro, PK.
-   * 
+   *
    * @returns Caso encontrado, 1 registro.
    */
   async findOne(cnh: number): Promise<Cliente | undefined> {

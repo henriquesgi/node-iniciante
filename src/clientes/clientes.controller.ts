@@ -8,9 +8,16 @@ import {
   ParseIntPipe,
   Post,
   Query,
-  ValidationPipe
+  ValidationPipe,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiBody, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiParam,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
 import { CnhValidationPipe } from 'src/common/pipes/cnh-validation.pipe';
 import { PositivoValidationPipe } from 'src/common/pipes/positivo-validation.pipe';
@@ -21,11 +28,14 @@ import { CreateClienteDto } from './dto/create-cliente.dto';
 @ApiBearerAuth()
 @ApiTags('Clientes')
 export class ClientesController {
-  constructor(private readonly usuariosService: ClientesService) { }
+  constructor(private readonly usuariosService: ClientesService) {}
 
   @Get()
   @ApiQuery({ name: 'pagina' })
-  @ApiResponse({ status: 200, description: 'Array contendo todas as representações.' })
+  @ApiResponse({
+    status: 200,
+    description: 'Array contendo todas as representações.',
+  })
   async findAll(@Query('pagina', PositivoValidationPipe) pagina: number) {
     return await this.usuariosService.findAll(pagina);
   }
@@ -38,9 +48,9 @@ export class ClientesController {
   async findOne(@Param('cnh', CnhValidationPipe, ParseIntPipe) cnh: number) {
     const request = await this.usuariosService.findOne(cnh);
     if (!request) {
-      throw new NotFoundException()
+      throw new NotFoundException();
     }
-    return request
+    return request;
   }
 
   @Post()
@@ -52,7 +62,7 @@ export class ClientesController {
     const request = await this.usuariosService.create(usuario);
     switch (request) {
       case '23505':
-        throw new ConflictException()
+        throw new ConflictException();
       default:
         break;
     }

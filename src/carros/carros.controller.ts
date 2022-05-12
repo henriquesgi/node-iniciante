@@ -10,9 +10,16 @@ import {
   Patch,
   Post,
   Query,
-  ValidationPipe
+  ValidationPipe,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiBody, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiParam,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
 import { PlacaValidationPipe } from 'src/common/pipes/placa-validation.pipe';
 import { PositivoValidationPipe } from 'src/common/pipes/positivo-validation.pipe';
@@ -23,7 +30,7 @@ import { CreateCarroDto } from './dto/create-carro.dto';
 @ApiBearerAuth()
 @ApiTags('Carros')
 export class CarrosController {
-  constructor(private readonly carrosService: CarrosService) { }
+  constructor(private readonly carrosService: CarrosService) {}
 
   @Delete(':placa')
   @ApiParam({ name: 'placa' })
@@ -33,13 +40,16 @@ export class CarrosController {
   async remove(@Param('placa', PlacaValidationPipe) placa: string) {
     const request = await this.carrosService.remove(placa);
     if (request === 0) {
-      throw new NotFoundException()
+      throw new NotFoundException();
     }
   }
 
   @Get()
   @ApiQuery({ name: 'pagina' })
-  @ApiResponse({ status: 200, description: 'Array contendo todas as representações.' })
+  @ApiResponse({
+    status: 200,
+    description: 'Array contendo todas as representações.',
+  })
   async findAll(@Query('pagina', PositivoValidationPipe) pagina: number) {
     return await this.carrosService.findAll(pagina);
   }
@@ -52,24 +62,26 @@ export class CarrosController {
   async findOne(@Param('placa', PlacaValidationPipe) placa: string) {
     const request = await this.carrosService.findOne(placa);
     if (!request) {
-      throw new NotFoundException()
+      throw new NotFoundException();
     }
-    return request
+    return request;
   }
 
   @Patch(':placa')
-  @ApiBody({ schema: { type: 'object', properties: { alugado: { type: 'boolean' } } } })
+  @ApiBody({
+    schema: { type: 'object', properties: { alugado: { type: 'boolean' } } },
+  })
   @ApiParam({ name: 'placa' })
   @ApiResponse({ status: 200, description: 'Representação modificada.' })
   @ApiResponse({ status: 400, description: 'Representação inválida.' })
   @ApiResponse({ status: 404, description: 'Representação não encontrada.' })
   async update(
     @Body('alugado', ParseBoolPipe) alugado: boolean,
-    @Param('placa', PlacaValidationPipe) placa: string
+    @Param('placa', PlacaValidationPipe) placa: string,
   ) {
     const request = await this.carrosService.update(placa, alugado);
     if (request === 0) {
-      throw new NotFoundException()
+      throw new NotFoundException();
     }
   }
 
@@ -82,7 +94,7 @@ export class CarrosController {
     const request = await this.carrosService.create(carro);
     switch (request) {
       case '23505':
-        throw new ConflictException()
+        throw new ConflictException();
       default:
         break;
     }

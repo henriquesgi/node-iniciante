@@ -8,6 +8,6 @@ import { HistoricoService } from './historico.service';
 @Module({
   controllers: [HistoricoController],
   imports: [TypeOrmModule.forFeature([Historico])],
-  providers: [HistoricoService]
+  providers: [HistoricoService],
 })
-export class HistoricoModule { }
+export class HistoricoModule {}

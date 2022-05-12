@@ -11,7 +11,7 @@ async function bootstrap() {
       type: 'http',
       description: 'Insira o **JWT** para utilizar as APIs.',
       scheme: 'bearer',
-      bearerFormat: 'JWT'
+      bearerFormat: 'JWT',
     })
     .setDescription('Documentação das APIs do projeto')
     .setTitle('node-iniciante')

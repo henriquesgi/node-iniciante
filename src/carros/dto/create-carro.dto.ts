@@ -1,12 +1,12 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsNumber,
   IsPositive,
   IsString,
   Max,
   MaxLength,
-  MinLength
-} from "class-validator";
+  MinLength,
+} from 'class-validator';
 
 export class CreateCarroDto {
   @IsString()
@@ -14,16 +14,16 @@ export class CreateCarroDto {
   @MinLength(7)
   @ApiProperty({
     description: 'Identificação única do carro.',
-    type: String
+    type: String,
   })
   placa: string;
 
   @IsNumber()
   @IsPositive()
-  @Max((new Date()).getUTCFullYear())
+  @Max(new Date().getUTCFullYear())
   @ApiProperty({
     description: 'Ano de fabricação do carro.',
-    type: Number
+    type: Number,
   })
   ano: number;
 
@@ -31,7 +31,7 @@ export class CreateCarroDto {
   @MaxLength(50)
   @ApiProperty({
     description: 'Modelo do carro.',
-    type: String
+    type: String,
   })
   modelo: string;
 
@@ -40,7 +40,7 @@ export class CreateCarroDto {
   @Max(5)
   @ApiProperty({
     description: 'Quantidade de passageiros do carro.',
-    type: Number
+    type: Number,
   })
   passageiros: number;
 }

@@ -9,4 +9,4 @@ import { UsuariosService } from './usuarios.service';
   imports: [TypeOrmModule.forFeature([Usuario])],
   providers: [UsuariosService],
 })
-export class UsuariosModule { }
+export class UsuariosModule {}

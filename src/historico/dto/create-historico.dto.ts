@@ -1,12 +1,12 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsDateString,
   IsNumber,
   IsPositive,
   IsString,
   Length,
-  Max
-} from "class-validator";
+  Max,
+} from 'class-validator';
 
 export class CreateHistoricoDto {
   @IsNumber()
@@ -14,7 +14,7 @@ export class CreateHistoricoDto {
   @Max(1000)
   @ApiProperty({
     description: 'Identificação única do cliente.',
-    type: Number
+    type: Number,
   })
   cnh: number;
 
@@ -22,14 +22,14 @@ export class CreateHistoricoDto {
   @Length(7)
   @ApiProperty({
     description: 'Identificação única do carro.',
-    type: String
+    type: String,
   })
   placa: string;
 
   @IsDateString()
   @ApiProperty({
     description: 'Data de devolução prevista para o cliente entregar o carro.',
-    type: Date
+    type: Date,
   })
   dataDevolucaoPrevista: Date;
 
@@ -37,7 +37,7 @@ export class CreateHistoricoDto {
   @IsPositive()
   @ApiProperty({
     description: 'Valor do aluguel de um carro a ser cobrado do cliente.',
-    type: Number
+    type: Number,
   })
   valorAluguel: number;
 }
