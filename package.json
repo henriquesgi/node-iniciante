@@ -1,10 +1,13 @@
 {
   "name": "node-iniciante",
   "version": "1.0.0",
-  "description": "",
-  "author": "Henrique",
+  "homepage": "https://github.com/henriquesgi/node-iniciante",
+  "author": {
+    "name": "Henrique",
+    "url": "https://github.com/henriquesgi"
+  },
   "private": true,
-  "license": "UNLICENSED",
+  "license": "Mozilla Public License 2.0",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
