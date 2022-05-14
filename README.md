@@ -1,60 +1,37 @@
-# Node Iniciante
 <p align="center">
   <img alt="GitHub" src="https://img.shields.io/github/license/henriquesgi/node-iniciante?style=flat-square">
 </p>
 
-## Propósito
-Uma das coisas mais aconchegantes é abrir um código pela primeira vez e descobrir que ele foi desenvolvido de maneira clara, coerente e que ele é de fácil manutenção. Mas acredite, é algo raro de encontrar.  
+**node-iniciante** é um projeto "modelo", minha concepção de como um projeto em Node.js deve ser adequadamente criado e mantido.  
 
-Sabe por que o projeto se chama **Node Iniciante**?  
-É comum ver pessoas que se julgam fodões, os Jedi da programação, mas que pouco se importarem com documentação, manutenção, testes, qualidade, padrões e outros. Isso me deixa bem incomodado, afinal:  
-Difícil manutenção?  
-Aumento de custos.  
+O projeto foi criado de modo que qualquer um consiga entender tudo sem nenhuma explicação, tudo está documentado, coerente e autoexplicatovo.
 
-Foi de XGH?  
-Cruze os dedos e reze para seu projeto funcionar até  que ele seja reescrito corretamente.  
-
-Códigos malucos e ilegíveis?  
-Provavelmente ninguém vai conseguir corrigir ou modificar nada, é aquilo ali pra sempre e fim.  
-
-Sem documentação?  
-Um desenvolvedor inexperiente não vai tentar entender, ele vai direto pedir ajuda a um mais experiente.  
-
-Já viu aquela galera que tem mania de encapsular frameworks?  
-Por exemplo, criam algo que encapsula o Express, sem documentação, sem testes e o pior, não dão manutenção :clown_face:.  
-
-E isso é só o começo, existem fatores como desmotivação, fadiga, sensação de que nada melhora e etc., eles estão sempre rondando projetos mal escritos.  
-
-Optei por criar um projeto modelo para mostrar que até mesmo um júnior (o que eu era na data em que comecei esse projeto, em 08/12/2021) consegue desenvolver algo que possa ser entendido facilmante e resolver todos os problemas acima em projetos back-end utilizando Node.js.  
+O nome é **node-iniciante** pois acredito que esse projeto, que nada mais é do que um CRUD bem organizado e documentado, é o que todo júnior (o que eu era em 08/12/2021 quando iniciei o projeto) deveria saber fazer.  
 
 ## O que falta ser feito
 
-TODO  
+- Scripts de testes
+- Implementar o Redis como uma camada adicional de segurança para o JWT  
 
 ## Como iniciar o projeto
 
-Construa a imagem do projeto  
+Construa a imagem do projeto:  
 ```bash
 docker build -t node-iniciante-image .
 ```
 
-Crie uma network  
-Essa instrução garante que uma bridge seja criada e os containers possam comunicar-se por alias  
+Crie uma network:  
 ```bash
 docker network create node-iniciante
 ```
+Essa instrução garante que uma bridge seja criada e os containers possam comunicar-se por alias.  
 
-> Não gosto de criar projetos "faz tudo", sou bem sistemático em dividir tudo de acordo com sua
-> respectiva responsabilidade. Dessa forma, não vejo propósito em manter schema de um BD no projeto, 
-> ele não será usado como migration.  
-> Saiba que o foco aqui é ser didático, manter tudo o mais bonito possível.
-
-Crie um arquivo que será usado para criar as tebelas e inserir dados no PostgreSQL  
+Crie um arquivo que será usado para criar as tebelas e inserir dados no PostgreSQL:  
 ```bash
 touch init.sh
 ```
 
-Insira o seguinte conteúdo no arquivo criado  
+Insira o seguinte script no arquivo criado:  
 ```sh
 set -e
 psql -v ON_ERROR_STOP=1 --username "postgres" --dbname "nodeiniciante" <<-EOSQL
@@ -94,7 +71,7 @@ psql -v ON_ERROR_STOP=1 --username "postgres" --dbname "nodeiniciante" <<-EOSQL
 EOSQL
 ```
 
-Crie e inicialize os containers  
+Crie e inicialize os containers:  
 ```bash
 # PostgreSQL
 docker run -d \
@@ -116,3 +93,11 @@ docker run -d \
 -p 3000:3000/tcp \
 node-iniciante-image
 ```
+
+## Documentação
+
+Documentação para utilizar as APIs: **_ip:3000/development/api_**  
+
+O projeto está totalmente documentado, dessa forma é possível gerar a documentação dele utilizando o **Compodoc**.  
+Apesar do Compodoc ser bem útil para Angular e NestJS, eu não gosto dele e por isso não está no projeto.  
+
