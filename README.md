@@ -4,7 +4,7 @@
 
 **node-iniciante** é um projeto "modelo", minha concepção de como um projeto em Node.js deve ser adequadamente criado e mantido.  
 
-O projeto foi criado de modo que qualquer um consiga entender tudo sem nenhuma explicação, tudo está documentado, coerente e autoexplicatovo.
+O projeto foi criado de modo que qualquer um consiga entender tudo sem nenhuma explicação, tudo está documentado, é coerente e autoexplicatovo.
 
 O nome é **node-iniciante** pois acredito que esse projeto, que nada mais é do que um CRUD bem organizado e documentado, é o que todo júnior (o que eu era em 08/12/2021 quando iniciei o projeto) deveria saber fazer.  
 
@@ -24,9 +24,9 @@ Crie uma network:
 ```bash
 docker network create node-iniciante
 ```
-Essa instrução garante que uma bridge seja criada e os containers possam comunicar-se por alias.  
+Essa instrução garante que uma bridge seja criada e os containers comuniquem-se por alias.  
 
-Crie um arquivo que será usado para criar as tebelas e inserir dados no PostgreSQL:  
+Crie um arquivo que será usado para criar as tebelas no PostgreSQL:  
 ```bash
 touch init.sh
 ```
@@ -98,6 +98,13 @@ node-iniciante-image
 
 Documentação para utilizar as APIs: **_ip:3000/development/api_**  
 
-O projeto está totalmente documentado, dessa forma é possível gerar a documentação dele utilizando o **Compodoc**.  
-Apesar do Compodoc ser bem útil para Angular e NestJS, eu não gosto dele e por isso não está no projeto.  
+Para gerar um JWT acesse a API de login com algum dos usuários:  
+```text
+joao/123
+maria/abc
+```
 
+Não é necessário nenhuma explicação adicional, o projeto está totalmente documentado e foi escrito seguindo padrões.  
+
+É possível gerar a documentação dele utilizando o **Compodoc**.  
+Apesar do Compodoc ser bem útil para Angular e NestJS, eu não gosto dele e por isso não está no projeto.  
