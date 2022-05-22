@@ -1,5 +1,6 @@
 <p align="center">
   <img alt="GitHub" src="https://img.shields.io/github/license/henriquesgi/node-iniciante?style=flat-square">
+  <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/henriquesgi/node-iniciante?style=flat-square">
 </p>
 
 **node-iniciante** é um projeto "modelo", minha concepção de como um projeto em Node.js deve ser adequadamente criado e mantido.  
