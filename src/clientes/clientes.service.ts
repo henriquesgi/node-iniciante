@@ -49,6 +49,6 @@ export class ClientesService {
    * @returns Caso encontrado, 1 registro.
    */
   async findOne(cnh: number): Promise<Cliente | undefined> {
-    return await this.clienteRepository.findOne(cnh);
+    return await this.clienteRepository.findOne({ where: { cnh: cnh } });
   }
 }

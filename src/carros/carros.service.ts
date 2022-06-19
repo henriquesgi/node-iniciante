@@ -49,7 +49,7 @@ export class CarrosService {
    * @returns Caso encontrado, 1 registro.
    */
   async findOne(placa: string): Promise<Carro | undefined> {
-    return await this.carroRepository.findOne(placa);
+    return await this.carroRepository.findOne({ where: { placa: placa } });
   }
 
   /**

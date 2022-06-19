@@ -19,6 +19,6 @@ export class UsuariosService {
    * @returns Caso encontrado, 1 registro.
    */
   async findOne(id: string) {
-    return await this.usuarioRepository.findOne(id);
+    return await this.usuarioRepository.findOne({ where: { id: id } })
   }
 }
