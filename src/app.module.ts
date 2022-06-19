@@ -26,10 +26,6 @@ import { UsuariosModule } from './usuarios/usuarios.module';
       database: process.env.POSTGRES_DATABASE,
       autoLoadEntities: true,
       synchronize: false,
-      migrations: ['migrations/*js'],
-      cli: {
-        migrationsDir: './src/db/migration',
-      },
     }),
   ],
   controllers: [AppController],
