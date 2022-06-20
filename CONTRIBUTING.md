@@ -18,7 +18,7 @@ Caso queira sugerir uma melhoria, independente do tipo de melhoria, crie um pull
 - **[Correção] Bug que pode quebrar o projeto**
 
 Escreva a descrição para exemplificar a sua sugestão:  
--_Essa sugestão tem por objetivo sugerir a atualização do pacote xyz da versão 1.0.0 para 1.3.0._  
+- _Essa sugestão tem por objetivo sugerir a atualização do pacote xyz da versão 1.0.0 para 1.3.0._  
 
 Cite também o que a sua sugestão irá alterar:  
--_A atualização do pacote irá garantir uma melhor estabilidade do servidor._
+- _A atualização do pacote irá garantir uma melhor estabilidade do servidor._
