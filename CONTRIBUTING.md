@@ -14,8 +14,8 @@ Descrever a solução também é importante:
 
 ## Sugestão
 Caso queira sugerir uma melhoria, independente do tipo de melhoria, crie um pull request com o prefixo **[Sugestão]** seguido por um título de fácil entendimento:  
-- **[Correção] Condição incorreta**
-- **[Correção] Bug que pode quebrar o projeto**
+- **[Sugestão] Condição incorreta**
+- **[Sugestão] Bug que pode quebrar o projeto**
 
 Escreva a descrição para exemplificar a sua sugestão:  
 - _Essa sugestão tem por objetivo sugerir a atualização do pacote xyz da versão 1.0.0 para 1.3.0._  
